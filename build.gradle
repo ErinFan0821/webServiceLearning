@@ -1,0 +1,21 @@
+apply plugin:'war'
+apply plugin: 'idea'
+
+task initProject << {
+    sourceSets.all { sourceSet ->
+        sourceSet.allJava.srcDirs.each {
+            it.exists() || it.mkdirs()
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.springframework:spring-webmvc:3.2.5.RELEASE'
+    testCompile ('junit:junit-dep:4.11') {
+//        exclude group: 'org.hamcrest'
+    }
+}
